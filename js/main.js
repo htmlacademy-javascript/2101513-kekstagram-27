@@ -11,5 +11,10 @@ function getRandomInteger (min, max) {
 }
 
 function checkMaxLength (currentString, maxLength = 140) {
-  return currentString.length <= maxLength;
+  if (!(currentString.length <= maxLength)) {
+    return false;
+  }
+
+  return true;
 }
+
