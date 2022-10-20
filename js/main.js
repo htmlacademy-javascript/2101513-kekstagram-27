@@ -1,5 +1,5 @@
 // Получение случайного целого числа
-function getRandomInteger(min, max) {
+function getRandomInteger (min, max) {
   const lower = Math.ceil(Math.min(min, max));
   const upper = Math.floor(Math.max(min, max));
   const result = Math.floor(Math.random() * (upper - lower + 1) + lower);
@@ -11,14 +11,16 @@ function getRandomInteger(min, max) {
   return result;
 }
 
+
 // Проверка на длину строки
-function checkMaxLength(currentString, maxLength) {
+function checkMaxLength (currentString, maxLength = 140) {
   if (!(currentString.length <= maxLength)) {
     return false;
   }
 
   return true;
 }
+
 
 // ========== Модуль 4 ==========
 // Комментарии
@@ -119,3 +121,5 @@ for (let i = 1; i <= 25; i++) {
   uploadedPhotos.push(createPhotoDescription());
 }
 console.log(uploadedPhotos)
+
+
