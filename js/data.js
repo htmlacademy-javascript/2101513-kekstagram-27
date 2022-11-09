@@ -1,4 +1,4 @@
-import { getRandomInteger } from "./util.js";
+import { getRandomInteger, getRandomUniqNumber, getRandomArrayElement } from './util.js';
 
 // Комментарии
 const MESSAGE = [
@@ -38,30 +38,9 @@ const NAMES = [
   'Никита',
 ];
 
-// Создание неповторяющегося случайного числа
-const getRandomUniqNumber = function(min, max) {
-  const usedNumbers = [];
-
-  return function() {
-    let currentValue = getRandomInteger(min, max);
-    if (usedNumbers.lenght >= (max - min + 1)) {
-      return null;
-    }
-    while (usedNumbers.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    usedNumbers.push(currentValue);
-    return currentValue;
-  };
-};
-
-// Получение случайного числа из массива
-const getRandomArrayElement = function(array) {
-  return array[getRandomInteger(0, array.length - 1)];
-};
-
 // Создание одного объекта - комментария фотографии
-const generatePhotoCommentId = getRandomUniqNumber(1, 100);
+const MAX_COMMENTS = 100;
+const generatePhotoCommentId = getRandomUniqNumber(1, MAX_COMMENTS);
 const createPhotoComment = function () {
   return {
     id: generatePhotoCommentId(),
@@ -74,32 +53,38 @@ const createPhotoComment = function () {
 // Массив комментариев
 // Генерация массива комментариев
 const comments = [];
-for (let i = 1; i <= 100; i++) {
+for (let i = 1; i <= MAX_COMMENTS; i++) {
   comments.push(createPhotoComment());
 }
 
 // Создание одного объекта - опубликованной фотографии
-const generatePhotoId = getRandomUniqNumber(1, 25);
-const generatePhotoUrl = getRandomUniqNumber(1, 25);
+const MAX_PHOTOS = 25;
+const LIKES = {
+  MIN_LIKES: 15,
+  MAX_LIKES: 200,
+};
+const generatePhotoId = getRandomUniqNumber(1, MAX_PHOTOS);
+const generatePhotoUrl = getRandomUniqNumber(1, MAX_PHOTOS);
 const createPhotoDescription = function () {
   return {
     id: generatePhotoId(),
     url: `photos/${generatePhotoUrl()}.jpg`,
     description: getRandomArrayElement(DESCRIPTION),
-    likes: getRandomInteger(15, 200),
+    likes: getRandomInteger(LIKES.MIN_LIKES, LIKES.MAX_LIKES),
     comments: getRandomArrayElement(comments),
   };
 };
 
 // Массив опубликованных фотографий
 // Генерация массива опубликованных фотографий
-const createUploadedPhotos = () => {
+const createUploadedPhotos = (amount) => {
   const uploadedPhotos = [];
-  for (let i = 1; i <= 25; i++) {
+  for (let i = 1; i <= amount; i++) {
     uploadedPhotos.push(createPhotoDescription());
   }
 
   return uploadedPhotos;
-}
+
+};
 
 export {createUploadedPhotos};

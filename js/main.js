@@ -1,2 +1,2 @@
-import { createUploadedPhotos } from "./data.js";
-createUploadedPhotos();
+// Миниаюры
+import './thumbnail.js';
