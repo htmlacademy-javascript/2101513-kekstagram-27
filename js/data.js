@@ -84,6 +84,7 @@ const createUploadedPhotos = (amount) => {
   }
 
   return uploadedPhotos;
+
 };
 
 export {createUploadedPhotos};

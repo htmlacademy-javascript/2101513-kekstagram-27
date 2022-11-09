@@ -1,3 +1,2 @@
 // Миниаюры
 import './thumbnail.js';
-
